@@ -1,0 +1,233 @@
+clc
+clear
+close all
+
+% ukol 2
+
+l2 = [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1]*0.97*10^(-3); %mm
+delta_l2_dopredne = [284 78 -130 -340 -551 -764 -974 -1183 -1388 -1595 -1800]*10^(-6); % um/m 
+delta_l2_zpetne = [295 86 -122 -333 -546 -761 -970 -1180 -1386 -1595 -1800]*10^(-6);
+
+delta_R_R_dopredne = delta_l2_dopredne - delta_l2_dopredne(1);
+delta_R_R_zpetne = delta_l2_zpetne - delta_l2_zpetne(1);
+
+%figure(7)
+%    grid on
+ %   plot(l2, delta_R_R_dopredne, LineStyle="--", Marker='x');
+
+
+%figure(8)
+%    grid on
+%    plot(l2, delta_R_R_zpetne, LineStyle="--", Marker='x');
+
+[K21, m21] = metoda_nejm_ctvercu(l2, delta_R_R_dopredne);
+[K22, m22] = metoda_nejm_ctvercu(l2, delta_R_R_zpetne);
+
+K2 = abs((K21 + K22)/2);
+% ukol 3
+
+fd = 46.95; % Hz
+fk = 58.82; % Hz
+
+% ukol 4
+
+r = 0.4;
+b = 0.08;
+h = 0.006;
+
+% Podelna deformace
+x = 1;
+m_pro_vypocet = 0:5;
+m4 = [0 2.8 3.8 4.8 5.8 6.8 7.8];
+delta_l4_podel = [170 388 463 553 630 698 781];
+
+figure(1)
+   grid on
+   plot(m_pro_vypocet, delta_l4_podel(2:7), LineStyle="none", Marker='x');
+
+% l4 = k*m + l40 = (l4-l40)/k = m = m(0) = tiha zavesu
+
+[k_l4, l40] = metoda_nejm_ctvercu(m_pro_vypocet, delta_l4_podel(2:7));
+
+m_zaves = -4:0.05:5;
+delta_l4_approx = k_l4 * m_zaves + l40;
+
+figure(2)
+    grid on
+    plot(m_zaves, delta_l4_approx, LineStyle="--", Marker='none');
+
+m_zaves = -4:0.02:5;
+delta_l4_approx = k_l4 * m_zaves + 170 ;
+
+figure(3)
+    grid on
+    hold on
+    plot(m4, delta_l4_podel, LineStyle="none", Marker='x');
+    plot(m_zaves, delta_l4_approx, LineStyle="--", Marker='none');
+
+% Pricna deformace
+
+delta_l4_pric = [-156 -209 -231 -254 -277 -298 -320];
+
+%figure(4)
+    grid on
+    %plot(m4, delta_l4_pric, LineStyle="--", Marker='x');
+
+m_zaves_real = 2.8;
+
+M = m4 * 9.8 * r;
+W = b * h^2 / 6;
+sigma_n = M/W;
+
+Delta_l4_podel_E = delta_l4_podel - delta_l4_podel(1);
+Delta_l4_pric_E = delta_l4_pric - delta_l4_pric(1);
+
+epsilon4_podel = Delta_l4_podel_E * 10^(-6)/K2;
+epsilon4_pric = Delta_l4_pric_E * 10^(-6)/K2;
+
+E = sigma_n./epsilon4_podel;
+mu = epsilon4_pric./epsilon4_podel;
+
+E = mean(E(2:7));
+mu = mean(mu(2:7));
+% ukol 5
+
+m5_ctvrt_2 = 2.35;
+m5_ctvrt_2_R = 2.94;
+m5_ctvrt_3 = 2.64;
+m5_ctvrt_3_R = 2.76;
+m5_pul = 2.72;
+m5_pul_R = 2.84;
+
+m5_prumer = sum([m5_ctvrt_2 m5_ctvrt_2_R m5_ctvrt_3 m5_ctvrt_3_R m5_pul m5_pul_R]) / 6;
+
+
+
+U5_ctvrt_2 = [0.954 0.851 0.814 0.774 0.733 0.683 0.642];
+U5_ctvrt_2_R = [-39.91 -39.99 -40.01 -40.04 -40.06 -40.09 -40.12];
+
+U5_ctvrt_3 = [1.362 1.260 1.224 1.192 1.139 1.105 1.075];
+U5_ctvrt_3_R = [1.267 1.164 1.128 1.090 1.053 1.018 0.978];
+
+U5_pul = [-0.119 -0.251 -0.297 -0.346 -0.396 -0.442 -0.492];
+U5_pul_R = [-0.059 -0.192 -0.236 -0.284 -0.331 -0.376 -0.424];
+
+[smer_ctvrt, offset_ctvrt] = metoda_nejm_ctvercu(m_pro_vypocet, U5_ctvrt_2(2:7));
+[smer_ctvrt_R, offset_ctvrt_R] = metoda_nejm_ctvercu(m_pro_vypocet, U5_ctvrt_2_R(2:7));
+[smer_ctvrt_3, offset_ctvrt_3] = metoda_nejm_ctvercu(m_pro_vypocet, U5_ctvrt_3(2:7));
+[smer_ctvrt_R_3, offset_ctvrt_R_3] = metoda_nejm_ctvercu(m_pro_vypocet, U5_ctvrt_3_R(2:7));
+[smer_pul, offset_pul] = metoda_nejm_ctvercu(m_pro_vypocet, U5_pul(2:7));
+[smer_pul_R, offset_pul_R] = metoda_nejm_ctvercu(m_pro_vypocet, U5_pul_R(2:7));
+
+U5_ctvrt_2_reg = smer_ctvrt*m_zaves + offset_ctvrt;
+U5_ctvrt_2_R_reg = smer_ctvrt_R*m_zaves + offset_ctvrt_R;
+U5_ctvrt_3_reg = smer_ctvrt_3*m_zaves + offset_ctvrt_3;
+U5_ctvrt_3_R_reg = smer_ctvrt_R_3*m_zaves + offset_ctvrt_R_3;
+U5_pul_reg = smer_pul*m_zaves + offset_pul;
+U5_pul_R_reg = smer_pul_R*m_zaves + offset_pul_R;
+
+figure(10)
+    subplot(3,2,1)
+    grid on
+    hold on
+    plot(m_pro_vypocet, U5_ctvrt_2(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_ctvrt_2_reg, Marker="none", LineStyle="--");
+    hold off
+
+    subplot(3,2,2)
+    grid on
+    hold on
+    plot(m_pro_vypocet, U5_ctvrt_2_R(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_ctvrt_2_R_reg, Marker="none", LineStyle="--");
+    hold off
+
+    subplot(3,2,3)
+    hold on
+    grid on
+    plot(m_pro_vypocet, U5_ctvrt_3(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_ctvrt_3_reg, Marker="none", LineStyle="--");
+    hold off
+
+    subplot(3,2,4)
+    grid on
+    hold on
+    plot(m_pro_vypocet, U5_ctvrt_3_R(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_ctvrt_3_R_reg, Marker="none", LineStyle="--");
+    hold off
+
+    subplot(3,2,5)
+    grid on
+    hold on
+    plot(m_pro_vypocet, U5_pul(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_pul_reg, Marker="none", LineStyle="--");
+    hold off
+
+    subplot(3,2,6)
+    grid on
+    hold on
+    plot(m_pro_vypocet, U5_pul_R(2:7), Marker="x", LineStyle="none");
+    plot(m_zaves, U5_pul_R_reg, Marker="none", LineStyle="--");
+    hold off
+%figure(5)
+  %  grid on
+   % plot(m4, U5_pul_R, LineStyle="--", Marker='x');
+
+
+U1 = 2;
+epsilon5_ctvrt_2 = 4*(U5_ctvrt_2 - U5_ctvrt_2(1))/K2/U1/1000;
+epsilon5_ctvrt_2_R = 4*(U5_ctvrt_2_R - U5_ctvrt_2_R(1))/K2/U1/1000; 
+epsilon5_ctvrt_3 = 4*(U5_ctvrt_3 - U5_ctvrt_3(1))/K2/U1/1000;
+epsilon5_ctvrt_3_R = 4*(U5_ctvrt_3_R - U5_ctvrt_3_R(1))/K2/U1/1000;
+epsilon5_pul = 4*(U5_pul - U5_pul(1))/K2/U1/1000;
+epsilon5_pul_R = 4*(U5_pul_R - U5_pul_R(1))/K2/U1/1000;
+% ukol 6
+
+E5_ctvrt_2 = sigma_n./epsilon5_ctvrt_2;
+E5_ctvrt_2_R = sigma_n./epsilon5_ctvrt_2_R;
+E5_ctvrt_3 = sigma_n./epsilon5_ctvrt_3;
+E5_ctvrt_3_R = sigma_n./epsilon5_ctvrt_3_R;
+E5_pul = sigma_n./epsilon5_pul - sigma_n./epsilon5_pul.*mu;
+E5_pul_R = sigma_n./epsilon5_pul_R - sigma_n./epsilon5_pul_R.*mu;
+
+E5_ctvrt_2 = mean(E5_ctvrt_2(2:7));
+E5_ctvrt_2_R = mean(E5_ctvrt_2_R(2:7));
+E5_ctvrt_3 = mean(E5_ctvrt_3(2:7));
+E5_ctvrt_3_R = mean(E5_ctvrt_3_R(2:7));
+E5_pul = mean(E5_pul(2:7));
+E5_pul_R = mean(E5_pul_R(2:7));
+
+
+U6_real = 1.445; %mV
+Uz = 1.999; %V
+
+Rt = 119.84; % Ohm
+R1 = 120.13; % Ohm
+R2 = 120.14; % Ohm
+R3 = 120.18; % Ohm
+
+U6_teor = Uz*(R1/(R1 + R2) - Rt/(Rt + R3)) %1.374 mV
+
+% Chyba odporu (0.010 + 0.001)% 
+% Chyba napeti (0.0035 + 0.0005)%
+
+delta_R6_hodnota = 0.01 / 100;
+delta_R6_rozsah = 0.001 / 100;
+delta_U6_hodnota = 0.0035 / 100;
+delta_U6_rozsah = 0.0005 / 100;
+
+u_B_Uz_6 = (delta_U6_hodnota*Uz + delta_R6_rozsah*10) / sqrt(3);
+u_B_R1_6 = (delta_R6_hodnota*R1 + delta_R6_rozsah*1000) / sqrt(3);
+u_B_R2_6 = (delta_R6_hodnota*R2 + delta_R6_rozsah*1000) / sqrt(3);
+u_B_R3_6 = (delta_R6_hodnota*R3 + delta_R6_rozsah*1000) / sqrt(3);
+u_B_Rt_6 = (delta_U6_hodnota*Rt + delta_R6_rozsah*1000) / sqrt(3);
+
+A_Uz_6 = R1/(R1 + R2) - Rt/(Rt + R3);
+A_R1_6 = Uz*(R2/(R1 + R2)^2);
+A_R2_6 = -Uz*(R1/(R1 + R2)^2);
+A_R3_6 = -Uz*(Rt/(R3 + Rt)^2);
+A_R_6 = Uz*(R3/(Rt + R3)^2);
+
+
+u_c = sqrt((u_B_Uz_6*A_Uz_6)^2 + (u_B_R1_6*A_R1_6)^2 + (u_B_R2_6*A_R2_6)^2 + (u_B_R3_6*A_R3_6)^2 + (u_B_Rt_6*A_Rt_6)^2)
+
+U_6 = 2*u_c

@@ -1,0 +1,284 @@
+% chktex 44
+
+\documentclass[fleqn]{protokol}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{environ}
+
+\usepackage[style=iso-numeric]{biblatex}
+\usepackage{csquotes}
+\addbibresource{ref.bib}
+%------------------- Zde vyplňte údaje -------------------------------
+\autor{Václav Horáček}
+\autorID{256296}
+\autorr{Jan Holík}
+\autorrID{256295}
+\rocnik{3}
+\merenodne{25.\,11.\,2025}
+\nazev{Měření s odporovými tenzometry}
+\predmet{Snímače}
+\teplota{X}
+\tlak{X}
+\vlhkost{X}
+%=====================================================================
+
+\newcommand{\neweq}{\\[0.8ex]}
+
+\begin{document}
+
+\maketitle                  % Vygeneruje titulní stránku podle vyplněných údajů
+\tableofcontents\newpage   % Vygeneruje obsah
+%------------------- Zde začíná samotný dokument ---------------------
+
+% command pro psani promennych k rovnicim
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}-{}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+
+% Uprava tabulek
+\def\arraystretch{1.3}
+\setlength{\headheight}{15pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% FUNKCE PRO GENEROVANI TABULEK 
+%   1. argument popisek
+%   2. argument format
+%   3. argument label
+%   Do tela psat data a \hline
+\NewEnviron{protocoltable}[3][Tabulka]{%
+    \begin{table}[!h]
+        \centering
+        \caption{#1}\label{tab:#3}
+        \vspace{0.3cm}
+        \begin{tabularx}{\textwidth}{#2}
+            \BODY
+        \end{tabularx}
+    \end{table}
+}
+
+% FUNKCE PRO TISK OBRAZKU
+%  1. argument titulek
+%  2. argument cesta napr. src\neco.png
+%  3. argument scale - velikost rozsah 0.0-1.0
+%  4. argument label
+\newcommand{\printfigure}[4][Obrazek]{%
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=#3]{#2}
+        \caption{#1}
+        \label{obr:#4}
+    \end{figure}
+}
+
+
+\section{Zadání}\label{kap:zadani}
+    \begin{enumerate}
+        \item Seznamte se s~technickým popisem k~tenzometrické aparatuře Vishay P-3500, její obsluhou a~s~popisem přístroje pro~zjišťování citlivosti tenzometrů.     
+        \item Změřte hodnotu součinitele deformační citlivosti K~tenzometru nalepeného na~přípravku pro~cejchování tenzometrů a~porovnejte ji~s~údaji výrobce. Z~naměřených hodnot vypočítejte i~přírůstek odporu tenzometru při~průhybu 1 mm. Odpor nezatíženého tenzometru je $R = 120\ \Omega$.
+        \item Zjistěte rezonanční kmitočty malých vetknutých nosníčků pomocí nalepených tenzometrů.
+        \item Zjistěte modul pružnosti~$E$, Poissonova číslo~$\mu$ materiálu velkého nosníku a~hmotnost závěsu závaží u~velkého nosníku.
+        \item Zjistěte modul pružnosti~$E$ materiálu velkého nosníku a~hmotnost závěsu závaží při~využití podelně nalepeného tenzometru. Využijte přípravky \linebreak můstkových zapojení, zdroj a~voltmetr jako náhradu ústředny Vishay P-3500 pro varianty: čtvrtmůstek s~dvouvodičovým zapojením, čtvrtmůstek s~třívodičovým zapojením a~půlmůstek. Napájecí napětí můstků nastavte stejné jako u~aparatury Vishay P-3500. Vyhodnoťte schopnost jednotlivých zapojení potlačit vliv odporu přívodních vodičů simulovaných vloženým odporem.
+        \item V konfiguraci třívodičového zapojení jako čtvrmůstek spočítejte ze~známých hodnot odporů a~napájecího napětí výstupní napětí můstku a~stanovte nejistotu tohoto výstupního napětí. Vypočítanou teoretickou hodnotu napětí porovnejte s~naměřenou hodnotou výstupního napětí čtvrtmůstku při~nezatíženém nosníku.
+    \end{enumerate}
+
+\pagebreak 
+
+% Ukol 1 - 
+\section{Úkol 1 - Popis aparatury Vishay P-3500 a její obshuha}
+ 
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr}  
+
+\pagebreak
+
+% Ukol 2 - 
+\section{Úkol 2 - Součinitele deformační pružnosti $E$}
+
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+
+        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|}{def2}
+            \hline
+            $l$[mm] & 0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5  \\ 
+            \hline
+            $\frac{\Delta l_{\downarrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 284 & 78 & -130 & -340 & -551 & -764  \\  
+            \hline
+            $\frac{\Delta l_{\uparrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 295 & 86 & -122 & -333 & -546 & -761  \\  
+            \hline
+            \hline
+            $l$[mm] & 0.6 & 0.7 & 0.8 & 0.9 & 1 & X  \\ 
+            \hline
+            $\frac{\Delta l_{\downarrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -974 & -1183 & -1388 & -1595 & -1800 & X \\  
+            \hline
+            $\frac{\Delta l_{\uparrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -970 & -1180 & -1386 & -1595 & -1800 & X \\  
+            \hline
+        \end{protocoltable}
+
+
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr} 
+    
+\pagebreak
+
+\section{Úkol 3 - Rezonanční kmitočty malých nosníčků}
+
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+
+        \begin{table}[!h]
+            \centering
+            \caption{foo}\label{tab:freq3}
+            \vspace{0.3cm}
+            \begin{tabular}{|c|c|}
+                \hline
+                $f$[Hz] & 46.95  \\ 
+                \hline
+                $f$[Hz] & 58.82  \\ 
+                \hline
+            \end{tabular}
+        \end{table}
+
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr} 
+
+\pagebreak
+
+% Ukol 4 - 
+\section{Úkol 4 - Parametry velkého nosníku}
+
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+        \begin{itemize}
+            \item $r = 0.4$ m
+            \item $b = 0.08$ m
+            \item $h = 0.006$ m
+        \end{itemize}
+        %   m4 = [0 2.8 3.8 4.8 5.8 6.8 7.8];
+        %   delta_l4_podel = [170 388 463 553 630 698 781];
+        %   delta_l4_pric = [-156 -209 -231 -254 -277 -298 -320];
+
+        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|C|}{zaves4}
+            \hline
+            $m$[kg] & 0 & $m_z$ & $m_z+1$ & $m_z+2$ &  $m_z+3$ & $m_z+4$ & $m_z+5$  \\ 
+            \hline
+            $\frac{\Delta l_{podel}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 170 & 388 & 463 & 553 & 630 & 698 & 781  \\  
+            \hline
+            $\frac{\Delta l_{pric}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -156 & -209 & -231 & -254 & -277 & -298 & -320  \\  
+            \hline
+        \end{protocoltable}
+
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr} 
+       
+\pagebreak
+
+\section{Úkol 5 - Parametry velkého nosníku, podélně nalepený tenzometr}
+
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|C|}{zaves5}
+            \hline
+            $m$[kg] & 0 & 2.8 & 3.8 & 4.8 & 5.8 & 6.8 & 7.8  \\ 
+            \hline
+            $U_{1/4} (2v)$[mV] & 0.954 & 0.851 & 0.814 & 0.774 & 0.733 & 0.683 & 0.642  \\  
+            \hline
+            $U_{1/4} (2v)$ s $R$ [mV] & -39.91 & -39.99 & -40.01 & -40.04 & -40.06 & -40.09 & -40.12  \\  
+            \hline
+            $U_{1/4} (3v)$[mV] & 1.362 & 1.260 & 1.224 & 1.192 & 1.139 & 1.105 & 1.075  \\  
+            \hline
+            $U_{1/4} (3v)$ s $R$ [mV] & 1.267 & 1.164 & 1.128 & 1.090 & 1.053 & 1.018 & 0.978 \\  
+            \hline
+            $U_{1/2}$[mV] & -0.119 & -0.251 & -0.297 & -0.346 & -0.396 & -0.442 & -0.492  \\  
+            \hline
+            $U_{1/2}$ s $R$ [mV] & -0.059 & -0.192 & -0.236 & -0.284 & -0.331 & -0.376 & -0.424  \\  
+            \hline
+        \end{protocoltable}
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr} 
+       
+\section{Závěr}
+
+\pagebreak
+
+\section{Úkol 6 - Nejistota výstupního napětí}
+ 
+    \subsection{Teoretický rozbor}
+    \subsection{Postup měření}
+    \subsection{Naměřené hodnoty}
+            \begin{table}[!h]
+            \centering
+            \caption{foo}\label{tab:nejistota6}
+            \vspace{0.3cm}
+            \begin{tabular}{|c|c|}
+                \hline
+                $U$[mV] & 1.445  \\ 
+                \hline
+                $Uz$[V] & 1.999  \\ 
+                \hline
+                $R_t$[$\Omega$] & 119.84  \\ 
+                \hline
+                $R_1$[$\Omega$] & 120.13  \\ 
+                \hline
+                $R_2$[$\Omega$] & 120.14  \\ 
+                \hline
+                $R_3$[$\Omega$] & 120.18  \\ 
+                \hline
+            \end{tabular}
+        \end{table}
+    \subsection{Zpracované výsledky měření}
+    \subsection{Závěr}  
+
+\pagebreak
+
+% Vishay P-3500, SN. 106013
+% P. pro cejchování tenzometrů, SN. DKP1167
+% Tenzometry, SN. DKP479
+% UNI-T UTD2025C, SN. 2100000787
+% Agilent 34401A, SN. MY44002660
+% RC generátor Hung Chang 8204A, SN. D7064
+% Instek GPD-3303S, SN. GES836987
+
+
+
+% Seznam přístrojů
+\section{Seznam použitých přístrojů}
+    \begin{protocoltable}[Seznam použitých přístrojů]{|C|C|C|}{pristroje}
+        \hline
+        Typ & Přístroj & Inventární číslo  \\
+        \hline
+        Tenzometrická aparatura & Vishay P-3500 & SN. 106013 \\
+        \hline
+        P. pro cejchování tenzometrů &  - & SN. DKP1167 \\
+        \hline
+        Tenzometry & - & SN. DKP479 \\
+        \hline
+        Meteostanice & Testo 622 & SN. 39507568/505 \\
+        \hline
+        Osciloskop & UNI-T UTD2025C & SN. 2100000787 \\
+        \hline
+        Multimetr & Agilent 34401A & SN. MY44002660\\
+        \hline
+        RC generátor & Hung Chang 8204A & SN. D7064\\
+        \hline
+        Lab. zdroj & Instek GPD-3303S & SN. GES836987\\
+        \hline
+
+
+    \end{protocoltable}%
+
+\pagebreak
+
+% Reference
+{\printbibliography}
+
+\end{document} % Konec dokumentu
