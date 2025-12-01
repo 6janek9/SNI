@@ -13,7 +13,7 @@ k = (n .* sum(x .* y) - sum(x) .* sum(y)) / ...
 
 y0 =    1/n .* (sum(y) - k.*sum(x));
 
-fprintf("Vysledky metody: \n n: %d \n a: %e \n b: %e \n c: %e \n d: %e \n e: %e \n\n", n, a, b, c, d, e)
-fprintf("Koeficienty v rovnicich: \n k = (n * a - b * c) / (n * d - e) \n y0 = 1/n *(c - k * b)\n\n")
+fprintf("Vysledky metody: \n n: %d \n a: %lf \n b: %lf \n  c: %lf \n d: %lf \n e: %lf \n", n, a, b, c, d, e)
+fprintf("Koeficienty v rovnicich: \n k = (n * a - b * c ")
 
 end

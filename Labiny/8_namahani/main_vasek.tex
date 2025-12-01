@@ -1,4 +1,4 @@
-% chktex 44
+%chktex 44
 
 \documentclass[fleqn]{protokol}
 \usepackage{array}
@@ -17,9 +17,9 @@
 \merenodne{25.\,11.\,2025}
 \nazev{Měření s odporovými tenzometry}
 \predmet{Snímače}
-\teplota{X}
-\tlak{X}
-\vlhkost{X}
+\teplota{22.2}
+\tlak{969.9}
+\vlhkost{32.6}
 %=====================================================================
 
 \newcommand{\neweq}{\\[0.8ex]}
@@ -31,9 +31,17 @@
 %------------------- Zde začíná samotný dokument ---------------------
 
 % command pro psani promennych k rovnicim
-\newenvironment{conditions}
-  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}-{}$} l}}
-  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\NewEnviron{conditions}{%
+    \text{Kde je:}
+    \noindent
+    \begin{table}[!h]
+        \begin{tabular}{@{}ll}
+        \BODY
+        \end{tabular}
+    \end{table}
+    \linebreak
+}
 
 
 % Uprava tabulek
@@ -98,31 +106,114 @@
 \pagebreak
 
 % Ukol 2 - 
-\section{Úkol 2 - Součinitele deformační pružnosti $E$}
+\section{Úkol 2 - Součinitele deformační citlivosti}
 
     \subsection{Teoretický rozbor}
+        Vztah pro relativní změnu odporu na poměrné deformaci $\epsilon$ kovových tenzometrů lze vyjádřit jako:
+        \begin{equation}
+            \label{hlavni rovnice}
+            \dfrac{\Delta R}{R} = K \cdot \dfrac{\Delta l}{l} = K \cdot \epsilon \quad[-]
+        \end{equation}
+        Přičemž relativní změna odporu tenzometru je možná vyjádřit jako:
+        \begin{equation}
+            \label{deltaR}
+            \dfrac{\Delta R}{R} = 4 \cdot \dfrac{\Delta U_2}{U_1} = 4 \cdot \dfrac{U_2 - U_{20}}{U_1} [-]
+        \end{equation}
+        Pro získání informace o $U_2$ lze využít vztah:
+        \begin{equation}
+            \label{napeti}
+            U_2 = \dfrac{U_1\cdot D \cdot 10^{-6} \cdot GF \cdot MULT}{Z}\quad [V]
+        \end{equation}
+        \begin{conditions}
+            $U_1$  & napájecí napětí tenzometrového můstku [V] \\
+            $D$    & hodnota čtená na displeji [-] \\
+            $GF$   & nastavená hodnota GAGE FACTOR [mV/V] \\
+            $MULT$ & koeficient zohledňující změnu zesílení [-] \\
+            $Z$    & vnitřní zesílení aparatury [-]
+        \end{conditions}
+        Po dosazení do vztahu~(\ref{napeti}) dojde ke zjednodušení: 
+        \begin{equation}
+            U_2 = \dfrac{2 \cdot D \cdot 10^{-6} \cdot 1 \cdot 1}{4}\quad = 5\cdot10^{-7} D \quad [V]
+        \end{equation}
+        Po dalším dosazení do vztahu~(\ref{deltaR}):
+        \begin{equation}
+            \label{lepsideltaR}
+            \dfrac{\Delta R}{R} =  4 \cdot 5\cdot 10^{-7} \cdot \dfrac{D - D_{0}}{2} = 10^{-6} (D - D_{0}) \quad [-]
+        \end{equation}
+        Pro poměrné relativní namáhání $\epsilon$ platí:
+        \begin{equation}
+            \label{epsilon}
+           \epsilon = \dfrac{4h}{b^2}y = \dfrac{4 \cdot 9.7 \cdot 10^{-3}}{(200 \cdot 10^{-3})^2} \cdot y = 0.97 \cdot y \quad [-]
+        \end{equation} 
+        Pokud dosadíme závislosti (\ref{epsilon}) a (\ref{lepsideltaR}) do rovnice (\ref{hlavni rovnice}), vznikne závislost:
+        \begin{equation}
+           10^{-6} (D - D_{0}) = K \cdot 0.97 \cdot y \rightarrow \Delta D = K \cdot 0.97 \cdot 10^{6} \cdot y \quad[-] 
+        \end{equation}
+        K lze poté získat proměřením závislosti údajem z aparatury \textit{Vishay P-3500 D} a prohnutím nosníku \textit{y} pomocí metody nejmenších čtverců.
+        \begin{equation}
+            K = \left( \dfrac{n \sum_{i}^{n} \Delta D_i y_i - \sum_{i}^{n} \Delta D_i \sum_{i}^{n} y_i }{n \sum_{i}^{n} y_i^2 - \left(\sum_{i}^{n} y_i \right)^2} \right)
+        \end{equation}
+
+
     \subsection{Postup měření}
     \subsection{Naměřené hodnoty}
 
-        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|}{def2}
+        \begin{protocoltable}[Naměřené údaje z cejchovací aparatury]{|c|C|C|C|C|C|C|}{ukol2-mereni}
             \hline
             $l$[mm] & 0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5  \\ 
             \hline
-            $\frac{\Delta l_{\downarrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 284 & 78 & -130 & -340 & -551 & -764  \\  
+            $D_\downarrow$[$\mu$m$\cdot$m$^{-1}$] & 284 & 78 & -130 & -340 & -551 & -764  \\  
             \hline
-            $\frac{\Delta l_{\uparrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 295 & 86 & -122 & -333 & -546 & -761  \\  
+            $D_\uparrow$[$\mu$m$\cdot$m$^{-1}$] & 295 & 86 & -122 & -333 & -546 & -761  \\  
             \hline
             \hline
             $l$[mm] & 0.6 & 0.7 & 0.8 & 0.9 & 1 & X  \\ 
             \hline
-            $\frac{\Delta l_{\downarrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -974 & -1183 & -1388 & -1595 & -1800 & X \\  
+            $D_\downarrow$[$\mu$m$\cdot$m$^{-1}$] & -974 & -1183 & -1388 & -1595 & -1800 & X \\  
             \hline
-            $\frac{\Delta l_{\uparrow}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -970 & -1180 & -1386 & -1595 & -1800 & X \\  
+            $D_\uparrow$[$\mu$m$\cdot$m$^{-1}$] & -970 & -1180 & -1386 & -1595 & -1800 & X \\  
             \hline
         \end{protocoltable}
 
 
     \subsection{Zpracované výsledky měření}
+        \begin{equation*}
+            \Delta D = \left| D_{\uparrow} - D_{\uparrow 0} \right| = \left| -1800 - 284 \right| = 2084 \  \mu m / m
+        \end{equation*}
+        \begin{equation*}
+            y = 0.97 \cdot l = 0.97 \cdot 0.001 = 0.00097 \ m = 0.970 \ mm
+        \end{equation*}
+
+        %0	0.097 0.194 0.291	0.388	0.485	0.582	0.679	0.776	0.873	0.970
+        % 0 & 206 &	414 & 624 &	835 & 1048 & 1258 & 1467 & 1672 & 1879 & 2084
+        % 0	& 209 &	417 & 628 &	841 & 1056 & 1265 & 1475 & 1681 & 1890 & 2095
+        \begin{protocoltable}[Vypočtené hodnoty pro výpočet $K$]{|c|C|C|C|C|C|C|}{ukol2-deformace}
+            \hline
+            $y$[mm] & 0 & 0.097 & 0.194 & 0.291 & 0.388 & 0.485  \\ 
+            \hline
+            $\Delta D_\downarrow$[$\mu$m$\cdot$m$^{-1}$] &  0 & 206 &	414 & 624 &	835 & 1048   \\  
+            \hline
+            $\Delta D_\uparrow$[$\mu$m$\cdot$m$^{-1}$] & 0	& 209 &	417 & 628 &	841 & 1056  \\  
+            \hline
+            \hline
+            $l$[mm] & 0.582 & 0.679 & 0.776 & 0.873 & 0.970 & X  \\ 
+            \hline
+            $\Delta D_\downarrow$[$\mu$m$\cdot$m$^{-1}$] & 1258 & 1467 & 1672 & 1879 & 2084 & X \\  
+            \hline
+            $\Delta D_\uparrow$[$\mu$m$\cdot$m$^{-1}$] & 1265 & 1475 & 1681 & 1890 & 2095 & X \\  
+            \hline
+        \end{protocoltable}
+
+        \begin{align*}
+            K_\downarrow &= \left( \dfrac{n \sum_{i}^{n} \Delta D_i l_i - \sum_{i}^{n} \Delta D_i \sum_{i}^{n} l_i }{n \sum_{i}^{n} l_i^2 - \left(\sum_{i}^{n} l_i \right)^2} \right) \\
+            K_\downarrow &= \dfrac{11 \cdot 7.802 \cdot 10^{-6} - 5.335\cdot 10^{-3} \cdot 1.156\cdot 10^{-2}}{11 \cdot 3.622\cdot 10^{-6} \cdot 2.846e{-5}} \rightarrow \boxed{K = 2.155}
+        \end{align*}
+
+        Pro výchylku směrem nahoru vyšlo $\boxed{K_\uparrow = 2.166}$ a byla vypočítána stejně jako $K_\uparrow$. Průměr těchto dvou hodnot je tedy:
+
+        \begin{equation*}
+            \overline{K} = \dfrac{K_\downarrow + K_\uparrow}{2} = \dfrac{2.155 + 2.166}{2} \rightarrow \boxed{K = 2.160}
+        \end{equation*}
     \subsection{Závěr} 
     
 \pagebreak
@@ -135,7 +226,7 @@
 
         \begin{table}[!h]
             \centering
-            \caption{foo}\label{tab:freq3}
+            \caption{Naměřené rezonanční frekvencne malých nosníčků}\label{tab:ukol3-frekvence}
             \vspace{0.3cm}
             \begin{tabular}{|c|c|}
                 \hline
@@ -155,6 +246,34 @@
 \section{Úkol 4 - Parametry velkého nosníku}
 
     \subsection{Teoretický rozbor}
+        \begin{equation}
+            \sigma = E \cdot \epsilon
+        \end{equation}
+        \begin{conditions}
+            $\sigma_n$ & mechanické napětí v příslušném směru [Pa] \\
+            $E$ & modul pružnosti v tahu [Pa]. Je to konstanta úměrnosti, která je u běžných  \\
+                & kovových materiálů směrově nezávislá \\
+            $\epsilon$ & je poměrná deformace v příslušném směru [-] 
+        \end{conditions}
+        \begin{equation}
+            \mu = \dfrac{\epsilon_t}{\epsilon_n}
+        \end{equation}
+        \begin{conditions}
+            $\mu$ & Poissonovo číslo [-] \\
+            $\epsilon_t$ & poměrná deformace ve směru kolmém na působící sílu [-] \\
+            $\epsilon_n$ & poměrná deformace ve směru působící síly [-]
+        \end{conditions}
+        \begin{align}
+            \sigma_n &= \dfrac{M}{W} \quad [\text{Pa}]\\
+            W &= \dfrac{1}{6} \cdot b \cdot h^2 \quad [\text{m}^3]\\
+            M &= F \cdot r \quad [N\cdot m] 
+        \end{align}
+        \begin{conditions}
+            $\sigma_n$ & mechanické napětí [Pa] \\
+            $M$ & ohybový moment [N$\cdot$m] \\
+            $W$ & modul průřezu nosníku [m$^3$] \\
+            $F$ & síla působící na nosník [N]
+        \end{conditions}
     \subsection{Postup měření}
     \subsection{Naměřené hodnoty}
         \begin{itemize}
@@ -162,33 +281,92 @@
             \item $b = 0.08$ m
             \item $h = 0.006$ m
         \end{itemize}
-        %   m4 = [0 2.8 3.8 4.8 5.8 6.8 7.8];
+        %   m4 = [0 2.78 3.78 4.78 5.78 6.78 7.78];
         %   delta_l4_podel = [170 388 463 553 630 698 781];
         %   delta_l4_pric = [-156 -209 -231 -254 -277 -298 -320];
 
-        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|C|}{zaves4}
+        \begin{protocoltable}[Naměřené hodnoty z Vishay P-3500 při postupném zatěžování nosníku]{|c|C|C|C|C|C|C|C|}{ukol4-mereni}
             \hline
             $m$[kg] & 0 & $m_z$ & $m_z+1$ & $m_z+2$ &  $m_z+3$ & $m_z+4$ & $m_z+5$  \\ 
             \hline
-            $\frac{\Delta l_{podel}}{l}$[$\mu$m$\cdot$m$^{-1}$] & 170 & 388 & 463 & 553 & 630 & 698 & 781  \\  
+            $D_{n}$[$\mu$m$\cdot$m$^{-1}$] & 170 & 388 & 463 & 553 & 630 & 698 & 781  \\  
             \hline
-            $\frac{\Delta l_{pric}}{l}$[$\mu$m$\cdot$m$^{-1}$] & -156 & -209 & -231 & -254 & -277 & -298 & -320  \\  
+            $D_{t}$[$\mu$m$\cdot$m$^{-1}$] & -156 & -209 & -231 & -254 & -277 & -298 & -320  \\  
             \hline
         \end{protocoltable}
 
     \subsection{Zpracované výsledky měření}
+
+        \printfigure[Závislost údaje Vishay P-3500 $D$ na zatížení nosníku $m$]{src/zatizeni.png}{0.35}{charka}
+
+        
+
+        \begin{align*}
+            M &= F \cdot r = m \cdot g \cdot r = 7.78 \cdot 9.81 \cdot 0.4 = 30.50 \ N \cdot \text{m} \\
+            W &= \dfrac{1}{6} \cdot b \cdot h^2 = \dfrac{1}{6} \cdot 0.08 \cdot 0.006^2 = 4.8 \cdot 10^{-7} \ \text{m}^3 \\
+            \sigma_n &= \dfrac{M}{W} = \dfrac{10.9}{4.8 \cdot 10^{-7}} = 6.354\cdot 10^7 \ \text{Pa}
+        \end{align*}
+
+        \begin{equation*}
+            \epsilon_{n} = \dfrac{\Delta D_{n} \cdot 10^{-6}}{K} = \dfrac{|D_{n} - D_{n0}| \cdot 10^{-6}}{K} = \dfrac{|781 - 170| \cdot 10^{-6}}{2.16} = 2.829 \cdot 10^{-4} \\
+        \end{equation*}
+
+        \begin{equation*}
+              \epsilon_{t} = \dfrac{\Delta D_{t} \cdot 10^{-6}}{K} = \dfrac{|D_{t} - D_{t0}| \cdot 10^{-6}}{K} = \dfrac{|-320 + 156| \cdot 10^{-6}}{2.16} = 7.591 \cdot 10^{-5} 
+        \end{equation*}
+
+        \begin{equation*}
+            E = \dfrac{\sigma_n}{\epsilon_n} = \dfrac{6.354\cdot 10^7}{2.829 \cdot 10^{-4}} = 2.243 \cdot 10^{11} \  \text{Pa}
+        \end{equation*}
+
+        \begin{equation*}
+            \mu = \dfrac{\epsilon_t}{\epsilon_n} = \dfrac{7.591 \cdot 10^{-5}}{2.829 \cdot 10^{-4}} = 0.2684 
+        \end{equation*}
+        % 0 & 2.270 \cdot 10^{7} & 3.087\cdot 10^{7} & 3.904 \cdot 10^{7} & 4.720 \cdot 10^{7} & 5.537\cdot 10^{7} & 6.354 \cdot 10^{7}
+        % 0	& 1.009 & 1.356 & 1.773 & 2.129 & 2.444 & 2.828
+        % 0 & 24.53 & 34.71 & 45.36 & 56.01 & 65.73 & 75.91
+        % X & 225.0 & 227.6 & 220.2	& 221.6 & 226.6 & 224.7
+        \begin{protocoltable}[Vypočtené hodnoty $E$, $\mu$ a veličiny pro to potřebné]{|c|C|C|C|C|C|C|C|}{ukol4-hodnoty}
+            \hline
+            $m$[kg] & 0 & 2.78 & 3.78 & 4.78 & 5.78 & 6.78 & 7.78  \\ 
+            \hline
+            $D_{n}$[$\mu$m$\cdot$m$^{-1}$] & 170 & 388 & 463 & 553 & 630 & 698 & 781  \\  
+            \hline
+            $D_{t}$[$\mu$m$\cdot$m$^{-1}$] & -156 & -209 & -231 & -254 & -277 & -298 & -320  \\  
+            \hline
+            $M$[N$\cdot$m] & 0 & 10.90 & 14.82 & 18.74 & 22.66 & 26.58 & 30.50  \\  
+            \hline
+            $\sigma_n$[GPa] & 0 & $0.0227$ & $0.03087$ & $0.03904$ & $0.04720$ & $0.05537$ & $0.06354$  \\  
+            \hline
+            $\epsilon_{n}$[$10^{-6}$] & 0	& 100.9 & 135.6 & 177.3 & 212.9 & 244.4 & 282.8  \\  
+            \hline
+            $\epsilon_{t}$[$10^{-6}$] & 0 & 24.53 & 34.71 & 45.36 & 56.01 & 65.73 & 75.910  \\  
+            \hline
+            $E$[GPa] & X & 225.0 & 227.6 & 220.2 & 221.6 & 226.6 & 224.7  \\  
+            \hline
+            $\mu$[-] & X & 0.2431 & 0.2560 & 0.2559 & 0.2630 & 0.2689 &	0.2684  \\  
+            \hline
+        \end{protocoltable}
+
+        \begin{align*}
+            \overline{E} &= \dfrac{1}{N} \sum_{i = 0}^{n} E_i = \dfrac{1}{6} \sum_{i = 1}^{6} E = 224.3 \text{GPa} \\
+            \overline{\mu} &= \dfrac{1}{N} \sum_{i = 0}^{n} \mu_i = \dfrac{1}{6} \sum_{i = 1}^{6} \mu_i = 0.2592 
+        \end{align*}
+
+
+
     \subsection{Závěr} 
        
 \pagebreak
 
-\section{Úkol 5 - Parametry velkého nosníku, podélně nalepený tenzometr}
+\section{Úkol 5 - Parametry velkého nosníku, můstková měření}
 
     \subsection{Teoretický rozbor}
     \subsection{Postup měření}
     \subsection{Naměřené hodnoty}
-        \begin{protocoltable}[foo]{|c|C|C|C|C|C|C|C|}{zaves5}
+        \begin{protocoltable}[Naměřená napětí z můstků při zatěžování nosníku]{|c|C|C|C|C|C|C|C|}{ukol5-napeti}
             \hline
-            $m$[kg] & 0 & 2.8 & 3.8 & 4.8 & 5.8 & 6.8 & 7.8  \\ 
+            $m$[kg] & 0 & 2.78 & 3.78 & 4.78 & 5.78 & 6.78 & 7.78  \\ 
             \hline
             $U_{1/4} (2v)$[mV] & 0.954 & 0.851 & 0.814 & 0.774 & 0.733 & 0.683 & 0.642  \\  
             \hline
@@ -204,26 +382,144 @@
             \hline
         \end{protocoltable}
     \subsection{Zpracované výsledky měření}
+
+        \begin{table}[!h]
+            \centering
+            \caption{Odečtené hodnoty hmotností závěsu pro různé můstky}\label{tab:ukol5-hmotnosti}
+            \vspace{0.3cm}
+            \begin{tabular}{|c|c|}
+                \hline
+                Typ můstku & Odečtená hmotnost $m$ [kg]  \\ 
+                \hline
+                Dvouvodičové zapojení čtvrtmůstku & 2.35  \\ 
+                \hline
+                -//- s předřadným R & 2.94  \\ 
+                \hline
+                Třívodičové zapojení čtvrtmůstku & 2.64  \\ 
+                \hline
+                -//-  s předřadným R & 2.76  \\ 
+                \hline
+                Půlmůstek & 2.72  \\ 
+                \hline
+                Půlmůstek s předřadným R & 2.84  \\ 
+                \hline
+            \end{tabular}
+        \end{table}
+
+        \begin{equation*}
+            \overline{m} = \dfrac{1}{N} \sum_{i = 0}^{n} m_i = \dfrac{1}{6} \sum_{i = 0}^{6} m_i = 2.708 \text{ kg}
+        \end{equation*}
+
+        \begin{equation*}
+            4 \cdot \dfrac{|U_2 - U_{20}|}{U_1} = K \cdot \epsilon \rightarrow \epsilon = 4 \cdot \dfrac{|U_2 - U_{20}|}{K \cdot U_1}
+        \end{equation*}
+
+        % 0 & 95.35 & 129.6 & 166.6 & 204.6 & 250.9 & 288.8
+        % 0	& 74.06 & 92.57 & 120.3 & 138.9 & 166.6 & 194.4
+        % 0 & 94.42 & 127.8 & 157.4 & 206.4 & 237.9 & 265.7
+        % 0 & 95.35 & 128.7 & 163.9 & 198.1 & 230.5 & 267.5
+        % 0 & 122.2 & 164.8 & 210.1 & 256.4 & 299.0 & 345.3
+        % 0 & 123.1 & 163.9 & 208.3 & 251.8 & 293.5 & 337.9
+        
+        \begin{protocoltable}[Vypočtené hodnoty $\epsilon$ z hodnot z tabulky~\ref{tab:ukol5-napeti}]{|c|C|C|C|C|C|C|C|}{ukol5-deformace}
+            \hline
+            $\sigma_n$[GPa] & 0 & $0.0227$ & $0.03087$ & $0.03904$ & $0.04720$ & $0.05537$ & $0.06354$  \\   
+            \hline
+            $\epsilon_{1/4} (2v)$[$10^{-6}$] & 0 & 95.35 & 129.6 & 166.6 & 204.6 & 250.9 & 288.8  \\  
+            \hline
+            $\epsilon_{1/4} (2v)$ s $R$ [$10^{-6}$] & 0	& 74.06 & 92.57 & 120.3 & 138.9 & 166.6 & 194.4  \\  
+            \hline
+            $\epsilon_{1/4} (3v)$[$10^{-6}$] & 0 & 94.42 & 127.8 & 157.4 & 206.4 & 237.9 & 265.7  \\  
+            \hline
+            $\epsilon_{1/4} (3v)$ s $R$ [$10^{-6}$] & 0 & 95.35 & 128.7 & 163.9 & 198.1 & 230.5 & 267.5 \\  
+            \hline
+            $\epsilon_{1/2}$[$10^{-6}$] & 0 & 122.2 & 164.8 & 210.1 & 256.4 & 299.0 & 345.3  \\  
+            \hline
+            $\epsilon_{1/2}$ s $R$ [$10^{-6}$] & 0 & 123.1 & 163.9 & 208.3 & 251.8 & 293.5 & 337.9  \\  
+            \hline
+        \end{protocoltable}
+
+        % X & 238.1 & 238.2 & 234.3 & 230.7 & 220.7 & 220.0
+        % X & 306.6 & 333.5 & 324.4 & 340.0 & 332.3 & 326.8
+        % X & 240.4 & 241.6 & 248.0 & 228.7 & 232.7 & 239.1
+        % X & 238.1 & 239.9 & 238.2 & 238.3 & 240.2 & 237.5
+        % X & 234.0 & 236.0 & 233.9 & 231.8 & 233.2 & 231.7
+        % X & 232.2 & 237.2 & 236.0 & 236.1 & 237.6 & 236.8
+
+        \begin{equation*}
+            E_{1/4}= \dfrac{\sigma_n}{\epsilon}
+        \end{equation*}
+
+        \begin{equation*}
+            E_{1/2} = (1+\mu) \cdot \dfrac{\sigma_n}{\epsilon}
+        \end{equation*}
+
+        \begin{protocoltable}[Vypočtené hodnoty $E$ z hodnot z tabulky~\ref{tab:ukol5-deformace}]{|c|C|C|C|C|C|C|C|}{ukol5-moduly}
+            \hline
+            $E_{1/4} (2v)$[$GPa$] & X & 238.1 & 238.2 & 234.3 & 230.7 & 220.7 & 220.0  \\  
+            \hline
+            $E_{1/4} (2v)$ s $R$ [$GPa$] & X & 306.6 & 333.5 & 324.4 & 340.0 & 332.3 & 326.8 \\  
+            \hline
+            $E_{1/4} (3v)$[$GPa$] & X & 240.4 & 241.6 & 248.0 & 228.7 & 232.7 & 239.1  \\  
+            \hline
+            $E_{1/4} (3v)$ s $R$ [$GPa$] & X & 238.1 & 239.9 & 238.2 & 238.3 & 240.2 & 237.5 \\  
+            \hline
+            $E_{1/2}$[$GPa$] & X & 234.0 & 236.0 & 233.9 & 231.8 & 233.2 & 231.7 \\  
+            \hline
+            $E_{1/2}$ s $R$ [$GPa$] & X & 232.2 & 237.2 & 236.0 & 236.1 & 237.6 & 236.8  \\  
+            \hline
+        \end{protocoltable}
+
+        
+                % 230.3 327.2 238.4 238.7 233.4 236.0
+        \begin{table}[!h]
+            \centering
+            \caption{foo}\label{tab:ukol5-modely-pruznosti}
+            \vspace{0.3cm}
+            \begin{tabular}{|c|c|}
+                \hline
+                Typ můstku & Spočtený model pružnosti $E$ [GPa]  \\ 
+                \hline
+                Dvouvodičové zapojení čtvrtmůstku & 230.3  \\ 
+                \hline
+                -//- s předřadným R & 327.2  \\ 
+                \hline
+                Třívodičové zapojení čtvrtmůstku & 238.4  \\ 
+                \hline
+                -//-  s předřadným R & 238.7  \\ 
+                \hline
+                Půlmůstek & 233.4  \\ 
+                \hline
+                Půlmůstek s předřadným R & 236.0  \\ 
+                \hline
+            \end{tabular}
+        \end{table}
+
+        %
+
     \subsection{Závěr} 
        
-\section{Závěr}
 
 \pagebreak
 
 \section{Úkol 6 - Nejistota výstupního napětí}
  
     \subsection{Teoretický rozbor}
+        \begin{equation}
+            U = f(U_z, R_1, R_2, R_3, R_t) = U_z \cdot \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right) \quad [\text{mV}]
+        \end{equation}
     \subsection{Postup měření}
+
     \subsection{Naměřené hodnoty}
             \begin{table}[!h]
             \centering
-            \caption{foo}\label{tab:nejistota6}
+            \caption{Naměřené hodnoty výstupního napětí, napájecího napětí a odporů v můstku}\label{tab:nejistota6}
             \vspace{0.3cm}
             \begin{tabular}{|c|c|}
                 \hline
                 $U$[mV] & 1.445  \\ 
                 \hline
-                $Uz$[V] & 1.999  \\ 
+                $U_z$[V] & 1.999  \\ 
                 \hline
                 $R_t$[$\Omega$] & 119.84  \\ 
                 \hline
@@ -236,7 +532,76 @@
             \end{tabular}
         \end{table}
     \subsection{Zpracované výsledky měření}
-    \subsection{Závěr}  
+
+    \begin{align*}
+        U_{teor} &= U_z \cdot \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right)\\
+        U_{teor} &= 1.999 \cdot \left( \dfrac{120.13}{120.13+120.14} - \dfrac{119.84}{120.18+199.84} \right) \rightarrow \boxed{U_{teor} = 1.374 \cdot 10^{-3} \ \text{V}}
+    \end{align*}
+
+    \begin{align*}
+        u_B(U_z) &= \dfrac{\Delta U_z}{\chi} = \dfrac{\dfrac{\delta_{UH}}{100} \cdot U_z +\dfrac{\delta_{UR}}{100} \cdot U_R}{\chi} \\
+        u_B(U_z) &= \dfrac{\dfrac{0.0035}{100} \cdot 1.999 +\dfrac{0.0005}{100} \cdot 10}{\sqrt{3}} = 6.926 \cdot 10^{-5} \ \text{V}
+    \end{align*}
+
+    \begin{align*}
+        u_B(R_1) &= \dfrac{\Delta R_1}{\chi} = \dfrac{\dfrac{\delta_{RH}}{100} \cdot R +\dfrac{\delta_{RR}}{100} \cdot U_R}{\chi} \\
+        u_B(R_1) &= \dfrac{\dfrac{0.010}{100} \cdot 120.13 +\dfrac{0.001}{100} \cdot 1000}{\sqrt{3}} = 1.270 \cdot 10^{-2} \ \text{V}
+    \end{align*}
+
+    \begin{align*}
+        A_{U_z} &=  \dfrac{\partial f}{\partial U_z} = \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right) = 6.875 \cdot 10^{-4}\\
+        A_{R_1} &=  \dfrac{\partial f}{\partial R_1} = U_z \cdot \dfrac{R_2}{{(R_1 + R_2)^2}} = 4.160\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1} \\
+        A_{R_2} &=  \dfrac{\partial f}{\partial R_2} = -U_z \cdot \dfrac{R_1}{{(R_1 + R_2)^2}} = -4.160\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1} \\
+        A_{R_3} &=  \dfrac{\partial f}{\partial R_3} = -U_z \cdot \dfrac{R_t}{{(R_3 + R_t)^2}} = -4.158\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1} \\
+        A_{R_t} &=  \dfrac{\partial f}{\partial R_4} = U_z \cdot \dfrac{R_3}{{(R_3 + R_t)^2}} = 4.170\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1}\\
+    \end{align*}
+
+    \begin{equation*}
+        u_c(U_{teor}) = \sqrt{   \sum_{i = 0}^{n} (A_i \cdot u_c(i))^2    } = 9.774 \cdot 10^{-5} \ \text{V}
+    \end{equation*}
+
+    \begin{equation*}
+        U(U_{teor}) = k_r \cdot u_c(U_{teor}) = 2 \cdot 9.774 \cdot 10^{-5} = 1.955 \cdot 10^{-4} \ \text{V}
+    \end{equation*}
+
+    \begin{equation*}
+        U_{teor} = (1.374 \pm 0.1955) \ \text{mV} \rightarrow \boxed{U_{teor} = (1.4 \pm 0.2) \ \text{mV}}
+    \end{equation*}
+
+    \begin{protocoltable}[Uncertainty budget pro určení výstupního napětí můstku]{|C|C|c|C|}{ukol6-budget-mustek}
+            \hline
+            Veličina & Hodnota & $\Delta_{MAX}$ & $\chi$ \\
+            \hline 
+            $U_z$[V] & $1.999$ V & $1.200 \cdot 10^{-4} \  V $ & $\sqrt{3}$\\
+            \hline
+            $R_1$[$\Omega$] & $120.13 \ \Omega$  &  $2.201 \cdot 10^{-2} \  \Omega $ & $\sqrt{3}$\\
+            \hline
+            $R_2$[$\Omega$] & $120.14 \ \Omega$  &  $2.201 \cdot 10^{-2} \  \Omega  $ & $\sqrt{3}$\\
+            \hline
+            $R_3$[$\Omega$] & $120.18 \ \Omega$  &  $2.201 \cdot 10^{-2} \  \Omega  $ & $\sqrt{3}$\\
+            \hline
+            $R_t$[$\Omega$] & $119.84 \ \Omega$  & $1.420 \cdot 10^{-2} \  \Omega  $ & $\sqrt{3}$\\
+            \hline
+            Veličina & $u_{B}$ & $\frac{\partial \rho}{\partial x_i}$ & $u_c$ \\
+            \hline
+            $U_z$[V] & $9.774 \cdot 10^{-5}$ V & $6.875 \cdot 10^{-4}$  &  $9.774 \cdot 10^{-5}$ V \\
+            \hline
+            $R_1$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $4.160 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            \hline
+            $R_2$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.160 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            \hline
+            $R_3$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.158 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            \hline
+            $R_t$[$\Omega$] & $8.195 \cdot 10^{-3} \ \Omega$ & $4.170 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $8.195 \cdot 10^{-3} \ \Omega$ \\
+            \hline
+            \multicolumn{2}{|c|}{$U_{teor} = 1.445\cdot 10^{-3}$ V} & \multicolumn{2}{c|}{$u_C = 9.774 \cdot 10^{-5}$ V} \\
+            \hline
+        \end{protocoltable}
+
+    \subsection{Závěr} 
+    
+\section{Závěr}
+
 
 \pagebreak
 
