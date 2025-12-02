@@ -1,4 +1,4 @@
-%chktex 44
+%chktex-file 44
 
 \documentclass[fleqn]{protokol}
 \usepackage{array}
@@ -107,23 +107,39 @@
 
 % Ukol 2 - 
 \section{Úkol 2 - Součinitele deformační citlivosti}
-
+    Kapitola vychází ze zdroje~\cite{navod}.
     \subsection{Teoretický rozbor}
-        Vztah pro relativní změnu odporu na poměrné deformaci $\epsilon$ kovových tenzometrů lze vyjádřit jako:
+        Tenzometry se používají pro měření mechanické poměrné deformace, což je změna rozměrů objektu vůči jeho rozměrům v klidovém stavu. Tohoto údaje lze využít při měření síly, tlaku, vibrací a dalších fyzikálních veličin.
+        Poměrná deformace se značí $\epsilon$ a je bezrozměrná, respektive [m/m].
+
+        Při změně mechnických vlastností materiálu se mění i elektrické vlastnosti, zejména elektrický odpor $R$ [$\Omega$]. Tomu odpovídá rovnice:
+        \begin{equation}
+            \label{odpor}
+            R = \rho \cdot \dfrac{l}{s} \quad [\Omega]
+        \end{equation}
+        \begin{conditions}
+            $\rho$  & měrný elektický odpor [$\Omega \cdot$m] \\
+            $l$    & délka tělesa [m] \\
+            $S$   & průřez tělesa [m$^2$] 
+        \end{conditions}
+        Pokud budeme uvažovat v rovnici změny délky a odporu tělesa vůči jejich původním hodnotám, tak lze přejít na rovnici:
         \begin{equation}
             \label{hlavni rovnice}
             \dfrac{\Delta R}{R} = K \cdot \dfrac{\Delta l}{l} = K \cdot \epsilon \quad[-]
         \end{equation}
-        Přičemž relativní změna odporu tenzometru je možná vyjádřit jako:
+        Kde $K$ je \textit{součinitel deformační citlivosti} a slouží jako konstanta úměry mezi změnou elektrického odporu a mechanické poměrné deformace.
+        Relativní změna odporu tenzometru je možná vyjádřit jako:
         \begin{equation}
             \label{deltaR}
-            \dfrac{\Delta R}{R} = 4 \cdot \dfrac{\Delta U_2}{U_1} = 4 \cdot \dfrac{U_2 - U_{20}}{U_1} [-]
+            \dfrac{\Delta R}{R} = 4 \cdot \dfrac{\Delta U_2}{U_1} = 4 \cdot \dfrac{U_2 - U_{20}}{U_1} \quad [-]
         \end{equation}
-        Pro získání informace o $U_2$ lze využít vztah:
+        Jelikož je k měření použita aparatura \textit{Vishay P-3500}, tak je pro získání informace o $U_2$ lze využít vztah:
         \begin{equation}
             \label{napeti}
             U_2 = \dfrac{U_1\cdot D \cdot 10^{-6} \cdot GF \cdot MULT}{Z}\quad [V]
         \end{equation}
+        \pagebreak
+        \linebreak
         \begin{conditions}
             $U_1$  & napájecí napětí tenzometrového můstku [V] \\
             $D$    & hodnota čtená na displeji [-] \\
@@ -140,7 +156,7 @@
             \label{lepsideltaR}
             \dfrac{\Delta R}{R} =  4 \cdot 5\cdot 10^{-7} \cdot \dfrac{D - D_{0}}{2} = 10^{-6} (D - D_{0}) \quad [-]
         \end{equation}
-        Pro poměrné relativní namáhání $\epsilon$ platí:
+        Při měření této závislosti se používá aparatura pro cejchování tenzometrů. Měření probíhá postupnou deformací nosníku při známé informaci o prohnutí. Pro poměrné relativní namáhání $\epsilon$ platí a plyne z geometrie cejchovacího přístroje:
         \begin{equation}
             \label{epsilon}
            \epsilon = \dfrac{4h}{b^2}y = \dfrac{4 \cdot 9.7 \cdot 10^{-3}}{(200 \cdot 10^{-3})^2} \cdot y = 0.97 \cdot y \quad [-]
@@ -149,13 +165,16 @@
         \begin{equation}
            10^{-6} (D - D_{0}) = K \cdot 0.97 \cdot y \rightarrow \Delta D = K \cdot 0.97 \cdot 10^{6} \cdot y \quad[-] 
         \end{equation}
-        K lze poté získat proměřením závislosti údajem z aparatury \textit{Vishay P-3500 D} a prohnutím nosníku \textit{y} pomocí metody nejmenších čtverců.
+        K lze poté získat po proměření závislosti údaje z aparatury \textit{Vishay P-3500 D} na prohnutí nosníku \textit{y} pomocí metody nejmenších čtverců~\cite{vypocty}.
         \begin{equation}
             K = \left( \dfrac{n \sum_{i}^{n} \Delta D_i y_i - \sum_{i}^{n} \Delta D_i \sum_{i}^{n} y_i }{n \sum_{i}^{n} y_i^2 - \left(\sum_{i}^{n} y_i \right)^2} \right)
         \end{equation}
 
-
+        \printfigure[Přístroj pro cejchování tenzometrů~\cite{navod}]{src/cejch.png}{0.65}{cejch}
+            \pagebreak
     \subsection{Postup měření}
+
+
     \subsection{Naměřené hodnoty}
 
         \begin{protocoltable}[Naměřené údaje z cejchovací aparatury]{|c|C|C|C|C|C|C|}{ukol2-mereni}
@@ -177,9 +196,11 @@
 
 
     \subsection{Zpracované výsledky měření}
+    Pro vykreslení závislosti změny údaje aparatury $\Delta D$ na prohnutí nosníku $y$ je potřeba z naměřených hodnot $D$ změnu spočítat pomocí vztahu:
         \begin{equation*}
             \Delta D = \left| D_{\uparrow} - D_{\uparrow 0} \right| = \left| -1800 - 284 \right| = 2084 \  \mu m / m
         \end{equation*}
+    Podobné je potřeba udělat i pro naměrěný údaj z cejchovacího přístroje.
         \begin{equation*}
             y = 0.97 \cdot l = 0.97 \cdot 0.001 = 0.00097 \ m = 0.970 \ mm
         \end{equation*}
@@ -204,6 +225,7 @@
             \hline
         \end{protocoltable}
 
+        Pomocí metody nejmenších čtverců je nyní možné určit součinitel deformační citlivosti $K$:
         \begin{align*}
             K_\downarrow &= \left( \dfrac{n \sum_{i}^{n} \Delta D_i l_i - \sum_{i}^{n} \Delta D_i \sum_{i}^{n} l_i }{n \sum_{i}^{n} l_i^2 - \left(\sum_{i}^{n} l_i \right)^2} \right) \\
             K_\downarrow &= \dfrac{11 \cdot 7.802 \cdot 10^{-6} - 5.335\cdot 10^{-3} \cdot 1.156\cdot 10^{-2}}{11 \cdot 3.622\cdot 10^{-6} \cdot 2.846e{-5}} \rightarrow \boxed{K = 2.155}
@@ -215,13 +237,26 @@
             \overline{K} = \dfrac{K_\downarrow + K_\uparrow}{2} = \dfrac{2.155 + 2.166}{2} \rightarrow \boxed{K = 2.160}
         \end{equation*}
     \subsection{Závěr} 
+    Z měření plyne, že závislost mezi relativní změnou elektrického odporu $\Delta R$ a mechanické poměrné deformace $\epsilon$ je skutečně lineární. Díky tomuto zjištění lze určit součinitel deformační citlivosti $K$, který lze spočítat jako směrnice závislosti pomocí metody nejmenších čtverců.
+
+    Součinitel deformační citlivosti $E$ byl z naměřených hodnot určen jako $E = 2.160$, což je o cca $10\%$ více, než je katalogová hodnota~\cite{navod}.
     
 \pagebreak
 
 \section{Úkol 3 - Rezonanční kmitočty malých nosníčků}
-
+    Kapitola vychází ze zdroje~\cite{navod}.
     \subsection{Teoretický rozbor}
+    Některá tělesa se mohou chovat jako tlumené oscilátory, to jest, že při jejich vychýlení začnou kmitat kolem rovnovážné polohy kmitočtem, který je závislý na materiálu, rozměrech a dalších parametrech.
+
+    Frekvence těchto kmitů se postupně se zmenšující amplitudou kmitů zvyšuje, protože rychlost tělesa je větší jak jeho vychýlení. Těsně po vychýlení těleso začne kmitat kmitočtem rezonančním. Tento kmitočet je určen materiálovými vlastnotmi a rozměry tělesa a slouží jako počáteční frekvence tlumených kmitů tělesa po vychýlení.
+
+    Jelikož tenzometry měří deformaci, tak je pomocí nich možné měřit i frekvenci kmitů. V této úloze se využívá dalšího generátoru harmonických průběhů a pomocí Lissajousových obrazců lze rezonanční kmitočet malých nosníčků určit.
+
+            \printfigure[Přípravek s nosníky a tenzometry~\cite{navod}]{src/nosnik.png}{0.70}{nosnik}
+    
+
     \subsection{Postup měření}
+    \pagebreak
     \subsection{Naměřené hodnoty}
 
         \begin{table}[!h]
@@ -237,8 +272,8 @@
             \end{tabular}
         \end{table}
 
-    \subsection{Zpracované výsledky měření}
     \subsection{Závěr} 
+    Z naměřených frekvencí lze pozorovat, že menší nosníček má vyšší rezonanční kmitočet. Z geometrických důvodů toto dává smysl, pokud budeme mít jiný přirozený oscilátor například matematické kyvaldo, tak kyvadlo s menším závěsem bude kmitat rychleji, protože svým koncem při podobné rychlosti musí pro jeden kmit opsat menší dráhu~\cite{mkyvadlo}.
 
 \pagebreak
 
@@ -246,8 +281,9 @@
 \section{Úkol 4 - Parametry velkého nosníku}
 
     \subsection{Teoretický rozbor}
+    Z mechanických vlastností tuhých těles plyne pomocí Hookova zákona pro nosník vztah:
         \begin{equation}
-            \sigma = E \cdot \epsilon
+            \sigma = E \cdot \epsilon \quad [\text{Pa}]
         \end{equation}
         \begin{conditions}
             $\sigma_n$ & mechanické napětí v příslušném směru [Pa] \\
@@ -255,19 +291,27 @@
                 & kovových materiálů směrově nezávislá \\
             $\epsilon$ & je poměrná deformace v příslušném směru [-] 
         \end{conditions}
+        Z tohoto vztahu plyne, že nosník se chová přibližně jako pružina a působí proti působící síle.
+
+        Mechanické namáhání se vždy projeví více směry, tudíž když se těleso v jednom směru natahuje, tak se v zájmu zachování konstantího objemu v druhém směru zúžuje.
+
+        Poměr deformací v různých směrech při namáhání v jednom směru se dá vyjádřit pomocí \textit{Poissonova čísla} $\mu$.
         \begin{equation}
-            \mu = \dfrac{\epsilon_t}{\epsilon_n}
+            \mu = \dfrac{\epsilon_t}{\epsilon_n} \quad [-]
         \end{equation}
         \begin{conditions}
             $\mu$ & Poissonovo číslo [-] \\
             $\epsilon_t$ & poměrná deformace ve směru kolmém na působící sílu [-] \\
             $\epsilon_n$ & poměrná deformace ve směru působící síly [-]
         \end{conditions}
+        K získání mechanického napětí působícího na velký nosník lze postupovat následujícím způsobem:
         \begin{align}
             \sigma_n &= \dfrac{M}{W} \quad [\text{Pa}]\\
             W &= \dfrac{1}{6} \cdot b \cdot h^2 \quad [\text{m}^3]\\
             M &= F \cdot r \quad [N\cdot m] 
         \end{align}
+        \pagebreak
+        \linebreak
         \begin{conditions}
             $\sigma_n$ & mechanické napětí [Pa] \\
             $M$ & ohybový moment [N$\cdot$m] \\
@@ -295,18 +339,26 @@
             \hline
         \end{protocoltable}
 
+        \pagebreak
+
     \subsection{Zpracované výsledky měření}
+        Jelikož se závislost informace z \textit{Vishay P-3500 D} a zatížení nosníku $m$ jeví jako lineární, tak je možné použít metodu nejmenších čtverců a charakteristiku extrapolovat:
 
         \printfigure[Závislost údaje Vishay P-3500 $D$ na zatížení nosníku $m$]{src/zatizeni.png}{0.35}{charka}
 
-        
 
+        Naměřené body byly posunuty tak, aby byl v nule stav, kdy byl nosník zatížen pouze prádzným závěsem. Ve chvíli, kdy se vykreslí přímka s konstantní hodnotou $D$, která byla naměřena při nezatíženém nosníku, tak lze jejím průnikem s charakteristikou určit hmotnost závěsu jako $\boxed{m_z = 2.78 \text{ kg}}$.
+
+
+        Se známými informacemi o zatížení nosníku lze vypočítat mechanické napětí $\sigma_n$:
         \begin{align*}
-            M &= F \cdot r = m \cdot g \cdot r = 7.78 \cdot 9.81 \cdot 0.4 = 30.50 \ N \cdot \text{m} \\
+            M &= F \cdot r = m \cdot g \cdot r = 7.78 \cdot 9.81 \cdot 0.4 = 30.50 \ \text{N} \cdot \text{m} \\
             W &= \dfrac{1}{6} \cdot b \cdot h^2 = \dfrac{1}{6} \cdot 0.08 \cdot 0.006^2 = 4.8 \cdot 10^{-7} \ \text{m}^3 \\
             \sigma_n &= \dfrac{M}{W} = \dfrac{10.9}{4.8 \cdot 10^{-7}} = 6.354\cdot 10^7 \ \text{Pa}
         \end{align*}
+        
 
+        Následně je možné spočítat poměrnou mechanickou deformaci $\epsilon$ v podélném a příčném směru:
         \begin{equation*}
             \epsilon_{n} = \dfrac{\Delta D_{n} \cdot 10^{-6}}{K} = \dfrac{|D_{n} - D_{n0}| \cdot 10^{-6}}{K} = \dfrac{|781 - 170| \cdot 10^{-6}}{2.16} = 2.829 \cdot 10^{-4} \\
         \end{equation*}
@@ -315,6 +367,7 @@
               \epsilon_{t} = \dfrac{\Delta D_{t} \cdot 10^{-6}}{K} = \dfrac{|D_{t} - D_{t0}| \cdot 10^{-6}}{K} = \dfrac{|-320 + 156| \cdot 10^{-6}}{2.16} = 7.591 \cdot 10^{-5} 
         \end{equation*}
 
+        Nyní už je dostupných dost informací k vypočítání modulu pružnosti $E$ a \textit{Poissonova čísla} $\mu$:
         \begin{equation*}
             E = \dfrac{\sigma_n}{\epsilon_n} = \dfrac{6.354\cdot 10^7}{2.829 \cdot 10^{-4}} = 2.243 \cdot 10^{11} \  \text{Pa}
         \end{equation*}
@@ -348,20 +401,26 @@
             \hline
         \end{protocoltable}
 
+        Jelikož je možné spočítat $E$ i $\mu$ pro více hodnot zatížení tak je možné je pro přehlednost zprůměrovat (parametry jsou~konstanty a~neměly by se měnit):
+
         \begin{align*}
             \overline{E} &= \dfrac{1}{N} \sum_{i = 0}^{n} E_i = \dfrac{1}{6} \sum_{i = 1}^{6} E = 224.3 \text{GPa} \\
             \overline{\mu} &= \dfrac{1}{N} \sum_{i = 0}^{n} \mu_i = \dfrac{1}{6} \sum_{i = 1}^{6} \mu_i = 0.2592 
         \end{align*}
 
-
-
     \subsection{Závěr} 
+        Při postupném zatěžování nosníku a měřením hodnot z aparatury \textit{Vishay P-3500} bylo možné extrapolací naměřených bodů spočítat hmotnost závěsu, která vyšla $m = 2.78\text{ kg}$.
+
+        Z naměřených hodnot bylo možné spočítat model pružnosti nosníku $E$, který vyšel v průměru $E = 224.4 \text{ GPa}$, což se od běžné hodnoty $220\text{ GPa}$ liší o cca $2\  \%$. 
+        
+        Vypočítáno bylo též \textit{Poissonovo číslo} $\mu$, které vyšlo v průměru $\mu = 0.2592$. Běžná hodnota $\mu$ bývá 0.3, což se od naměřené hodnoty liší o cca $14\  \%$\cite{navod}.
        
 \pagebreak
 
 \section{Úkol 5 - Parametry velkého nosníku, můstková měření}
-
+    Kapitola vychází ze zdroje~\cite{navod}.
     \subsection{Teoretický rozbor}
+    Kapitola obsahuje stejnou teorii jako kapitola 2 a 4. Došlo pouze k výměně aparatury \textit{Vishay P-3500} za trojici přípravků s odporovými můstky, ze kterých získáváme místo $D$ informaci o elektrickém napětí $U$.
     \subsection{Postup měření}
     \subsection{Naměřené hodnoty}
         \begin{protocoltable}[Naměřená napětí z můstků při zatěžování nosníku]{|c|C|C|C|C|C|C|C|}{ukol5-napeti}
@@ -382,7 +441,7 @@
             \hline
         \end{protocoltable}
     \subsection{Zpracované výsledky měření}
-
+        Hmotnosti závěsu byly pro měření pomocí různých konfigurací můstků stejnou extrapolací pomocí metody nejmenších čtverců stejně jako v kapitole 4.
         \begin{table}[!h]
             \centering
             \caption{Odečtené hodnoty hmotností závěsu pro různé můstky}\label{tab:ukol5-hmotnosti}
@@ -405,21 +464,25 @@
                 \hline
             \end{tabular}
         \end{table}
-
+        Pro přehlednost lze opět hmotnosti průměrovat:
         \begin{equation*}
             \overline{m} = \dfrac{1}{N} \sum_{i = 0}^{n} m_i = \dfrac{1}{6} \sum_{i = 0}^{6} m_i = 2.708 \text{ kg}
         \end{equation*}
-
+        Pro zjištění $E$ je znovu nutné zjisit informaci o $\epsilon$, kterou lze zjistit z rovnice (\ref{hlavni rovnice}), nicméně za změnu odporu dosadíme změnu napětí pomocí vztahu (\ref{deltaR}).
         \begin{equation*}
-            4 \cdot \dfrac{|U_2 - U_{20}|}{U_1} = K \cdot \epsilon \rightarrow \epsilon = 4 \cdot \dfrac{|U_2 - U_{20}|}{K \cdot U_1}
+            4 \cdot \dfrac{|U_2 - U_{20}|}{U_1} = K \cdot \epsilon \rightarrow \epsilon = 4 \cdot \dfrac{|U_2 - U_{20}|}{K \cdot U_1} = 4 \cdot \dfrac{|(1.075 - 1.362) \cdot 10^{-3}|}{2.16 \cdot 2} = 265.7 \cdot 10^{-6}
         \end{equation*}
 
+        Po zjištění informace o $\epsilon$ je nutné brát v potaz druhy můstků. Pokud pracujeme s čtvrtmůstkem, tak není třeba nic měnit, nicméně pokud měříme s půlmůstkem, kdy se využívá obou složek tenzometrů, tak je nutné vztah upravit na:
+        \begin{equation*}
+         \epsilon = \dfrac{4}{\mu + 1} \cdot \dfrac{|U_2 - U_{20}|}{K \cdot U_1} = \dfrac{4}{0.2592 + 1} \cdot \dfrac{|(-0.424 + 0.059)\cdot 10^{-3}|}{2.16 \cdot 2} = 268.3 \cdot 10^{-6}
+        \end{equation*}
         % 0 & 95.35 & 129.6 & 166.6 & 204.6 & 250.9 & 288.8
         % 0	& 74.06 & 92.57 & 120.3 & 138.9 & 166.6 & 194.4
         % 0 & 94.42 & 127.8 & 157.4 & 206.4 & 237.9 & 265.7
         % 0 & 95.35 & 128.7 & 163.9 & 198.1 & 230.5 & 267.5
-        % 0 & 122.2 & 164.8 & 210.1 & 256.4 & 299.0 & 345.3
-        % 0 & 123.1 & 163.9 & 208.3 & 251.8 & 293.5 & 337.9
+        % 0 & 97.04 & 130.9 & 166.9 & 203.6 & 237.5 & 274.2
+        % 0 & 97.78 & 130.1 & 165.4 & 200.0 & 233.0 & 268.3
         
         \begin{protocoltable}[Vypočtené hodnoty $\epsilon$ z hodnot z tabulky~\ref{tab:ukol5-napeti}]{|c|C|C|C|C|C|C|C|}{ukol5-deformace}
             \hline
@@ -433,9 +496,9 @@
             \hline
             $\epsilon_{1/4} (3v)$ s $R$ [$10^{-6}$] & 0 & 95.35 & 128.7 & 163.9 & 198.1 & 230.5 & 267.5 \\  
             \hline
-            $\epsilon_{1/2}$[$10^{-6}$] & 0 & 122.2 & 164.8 & 210.1 & 256.4 & 299.0 & 345.3  \\  
+            $\epsilon_{1/2}$[$10^{-6}$] &  0 & 97.04 & 130.9 & 166.9 & 203.6 & 237.5 & 274.2  \\  
             \hline
-            $\epsilon_{1/2}$ s $R$ [$10^{-6}$] & 0 & 123.1 & 163.9 & 208.3 & 251.8 & 293.5 & 337.9  \\  
+            $\epsilon_{1/2}$ s $R$ [$10^{-6}$] & 0 & 97.78 & 130.1 & 165.4 & 200.0 & 233.0 & 268.3  \\  
             \hline
         \end{protocoltable}
 
@@ -445,14 +508,12 @@
         % X & 238.1 & 239.9 & 238.2 & 238.3 & 240.2 & 237.5
         % X & 234.0 & 236.0 & 233.9 & 231.8 & 233.2 & 231.7
         % X & 232.2 & 237.2 & 236.0 & 236.1 & 237.6 & 236.8
-
+        
+        Z $\epsilon$ je poté možné dopočítat hodnoty $E$, kdy se za $\sigma_n$ dosazují hodnoty v~úkolu~4:
         \begin{equation*}
-            E_{1/4}= \dfrac{\sigma_n}{\epsilon}
+            E_{}= \dfrac{\sigma_n}{\epsilon} = \dfrac{0.06354 2\cdot 10^{9}}{265.7 \cdot 10^{-6}} = 239.1 \text{ GPa}
         \end{equation*}
 
-        \begin{equation*}
-            E_{1/2} = (1+\mu) \cdot \dfrac{\sigma_n}{\epsilon}
-        \end{equation*}
 
         \begin{protocoltable}[Vypočtené hodnoty $E$ z hodnot z tabulky~\ref{tab:ukol5-deformace}]{|c|C|C|C|C|C|C|C|}{ukol5-moduly}
             \hline
@@ -470,11 +531,12 @@
             \hline
         \end{protocoltable}
 
+        Pro různé můstky vyšly následující průměrné moduly pružnosti $E$:
         
                 % 230.3 327.2 238.4 238.7 233.4 236.0
         \begin{table}[!h]
             \centering
-            \caption{foo}\label{tab:ukol5-modely-pruznosti}
+            \caption{Výsledné modely pružnosti $E$ pro různé měřící můstky}\label{tab:ukol5-modely-pruznosti}
             \vspace{0.3cm}
             \begin{tabular}{|c|c|}
                 \hline
@@ -498,14 +560,29 @@
         %
 
     \subsection{Závěr} 
+
+    Z naměřených a vypočtených hodnot lze usoudit, že dvouvodičové zapojení \linebreak čtvrtmůstku je ze všech nejméně přesné a stabilní. Při připojení předřadných odporů vodičů se hodnota modulu pružnosti $E$ změní z 230.3 GPa na 327.2 GPa. Vypočtená hmotnost závěsu se změní na 2.35 kg na 2.94 kg.
+
+    Třívodičové zapojení čtvrmůstku je stabilnější a přesnější. Při změně odporu přívodních vodičů se změní modul pružnosti $E$ z 238.4 GPa na 238.7 GPa, což je nejmenší změna ze všech můstků. Vypočtená hmotnost závěsu se změní na 2.64 kg na 2.76 kg.
+
+    Zapojení půlmůstek používá obě složky tenzometru a při připojení předřadného odporu $R = 50 \ \Omega$ se vypočtená $E$ změní z 233.4 GPa na 236.0 GPa. Tato hodnota je nejblíže referenční 220 GPa. Hmotnost závěsu se změní po připojení předřadného odporu z 2.72 kg na 2.84 kg.
+
+    Průměrná hodnota hmotnosti závěsu 2.708 kg se příliš neliší od 2.78 kg spočítaná v úkolu 4.
+
        
 
 \pagebreak
 
 \section{Úkol 6 - Nejistota výstupního napětí}
- 
+    Kapitola vychází ze zdrojů~\cite{nejistoty},~\cite{nejistoty_prezentace} a~\cite{zaokrouhlovani}.
     \subsection{Teoretický rozbor}
+        Pro měření deformace je možné tenzometr připojit do měřícího můstku, který poté změnou svého odporu vytvoří diferenční napětí, které se poté dá změřit multimetrem.
+
+        Tato metoda je poměrně přesná, nicméně všechny vnitřní komponenty můstku mají své tolerance a důsledkem toho je nejistota výstupního napětí, která se dá určit pomocí dílčích nejistot měření komponent můstku a napájecího napětí pomocí věty o šíření nejistoty.
+        
+        Výstupní napětí měřícího můstku lze popsat následujícím vztahem:
         \begin{equation}
+            \label{mustek}
             U = f(U_z, R_1, R_2, R_3, R_t) = U_z \cdot \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right) \quad [\text{mV}]
         \end{equation}
     \subsection{Postup měření}
@@ -533,21 +610,26 @@
         \end{table}
     \subsection{Zpracované výsledky měření}
 
+    Nejdříve je nutné spočítat $U_{teor}$, aby bylo možné k nějaké hodnotě nejistotu vztáhnout.
     \begin{align*}
         U_{teor} &= U_z \cdot \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right)\\
         U_{teor} &= 1.999 \cdot \left( \dfrac{120.13}{120.13+120.14} - \dfrac{119.84}{120.18+199.84} \right) \rightarrow \boxed{U_{teor} = 1.374 \cdot 10^{-3} \ \text{V}}
     \end{align*}
 
+    Dále je nutné určit dílčí nejistoty pro spočtení celkové nejistoty $u_C(U_{teor})$.
+    Pro výpočet nejistoty typu B udává výrobce relativní chybu při měření napětí $\delta_U = (0.0035 + 0.0005)\ \%$ a~relativní chybu při~měření odporu $\delta_R = (0.010 + 0.001)\ \%$~\cite{Agilent}. Vztahy pro~nejistoty typu~B pro~měření napětí a~odporu jsou~následující:  
     \begin{align*}
         u_B(U_z) &= \dfrac{\Delta U_z}{\chi} = \dfrac{\dfrac{\delta_{UH}}{100} \cdot U_z +\dfrac{\delta_{UR}}{100} \cdot U_R}{\chi} \\
         u_B(U_z) &= \dfrac{\dfrac{0.0035}{100} \cdot 1.999 +\dfrac{0.0005}{100} \cdot 10}{\sqrt{3}} = 6.926 \cdot 10^{-5} \ \text{V}
     \end{align*}
+
 
     \begin{align*}
         u_B(R_1) &= \dfrac{\Delta R_1}{\chi} = \dfrac{\dfrac{\delta_{RH}}{100} \cdot R +\dfrac{\delta_{RR}}{100} \cdot U_R}{\chi} \\
         u_B(R_1) &= \dfrac{\dfrac{0.010}{100} \cdot 120.13 +\dfrac{0.001}{100} \cdot 1000}{\sqrt{3}} = 1.270 \cdot 10^{-2} \ \text{V}
     \end{align*}
 
+    Pro výpočet celkové nejistoty je nutné jednotlivé nejistoty vynásobit citlivostními koeficienty $A$. Jejich výpočet je parciální derivací vztahu (\ref{mustek}) podel jednotlivýh veličin, do kterých se dosadí hodnoty z tabulky \ref{tab:nejistota6}. 
     \begin{align*}
         A_{U_z} &=  \dfrac{\partial f}{\partial U_z} = \left( \dfrac{R_1}{R_1+R_2} - \dfrac{R_t}{R_3+R_t} \right) = 6.875 \cdot 10^{-4}\\
         A_{R_1} &=  \dfrac{\partial f}{\partial R_1} = U_z \cdot \dfrac{R_2}{{(R_1 + R_2)^2}} = 4.160\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1} \\
@@ -556,14 +638,17 @@
         A_{R_t} &=  \dfrac{\partial f}{\partial R_4} = U_z \cdot \dfrac{R_3}{{(R_3 + R_t)^2}} = 4.170\cdot 10^{-3} \ \text{V} \cdot \Omega^{-1}\\
     \end{align*}
 
+    Jelikož je měření dílčích komponent zatíženo nízkou náhodnou chybou, tak je~možné zavést podmínku $u_A(i) = 0$ a~tím pádem $u_B(i) = u_C(i)$. Nyní je možné pomocí věty o šíření nejistot spočítat celkovou nejistotu $u_C(U_{teor})$.
     \begin{equation*}
         u_c(U_{teor}) = \sqrt{   \sum_{i = 0}^{n} (A_i \cdot u_c(i))^2    } = 9.774 \cdot 10^{-5} \ \text{V}
     \end{equation*}
 
+    K získání rozšířené nejistoty $U(U_{teor})$ je~nutné nejistotu vynásobit koeficientem rozšíření $k_r$.
     \begin{equation*}
         U(U_{teor}) = k_r \cdot u_c(U_{teor}) = 2 \cdot 9.774 \cdot 10^{-5} = 1.955 \cdot 10^{-4} \ \text{V}
     \end{equation*}
 
+    Konečně je možné uvézt zaokrouhlenou hodnotu a nejistotu~\cite{zaokrouhlovani}.
     \begin{equation*}
         U_{teor} = (1.374 \pm 0.1955) \ \text{mV} \rightarrow \boxed{U_{teor} = (1.4 \pm 0.2) \ \text{mV}}
     \end{equation*}
@@ -586,20 +671,22 @@
             \hline
             $U_z$[V] & $9.774 \cdot 10^{-5}$ V & $6.875 \cdot 10^{-4}$  &  $9.774 \cdot 10^{-5}$ V \\
             \hline
-            $R_1$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $4.160 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            $R_1$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $4.160 \cdot 10^{-3} \ V \cdot \Omega^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
             \hline
-            $R_2$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.160 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            $R_2$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.160 \cdot 10^{-3} \  V \cdot \Omega^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
             \hline
-            $R_3$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.158 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
+            $R_3$[$\Omega$] & $1.271 \cdot 10^{-2} \ \Omega$ & $-4.158 \cdot 10^{-3} \  V \cdot \Omega^{-1} $ & $1.271 \cdot 10^{-2} \ \Omega$ \\
             \hline
-            $R_t$[$\Omega$] & $8.195 \cdot 10^{-3} \ \Omega$ & $4.170 \cdot 10^{-3} \  \Omega \cdot V^{-1} $ & $8.195 \cdot 10^{-3} \ \Omega$ \\
+            $R_t$[$\Omega$] & $8.195 \cdot 10^{-3} \ \Omega$ & $4.170 \cdot 10^{-3} \  V \cdot \Omega^{-1} $ & $8.195 \cdot 10^{-3} \ \Omega$ \\
             \hline
             \multicolumn{2}{|c|}{$U_{teor} = 1.445\cdot 10^{-3}$ V} & \multicolumn{2}{c|}{$u_C = 9.774 \cdot 10^{-5}$ V} \\
             \hline
         \end{protocoltable}
 
     \subsection{Závěr} 
-    
+    Zaokrouhlená hodnota výstupního napětí $U_{teor}$ s nejistotou vyšla $(1.4 \pm 0.2) \ \text{mV}$. Hodnota výstupního napětí $U = 1.445$ mV naměřená multimetrem se nachází v~intervalu teoretické hodnoty s nejistotou.
+    \pagebreak
+
 \section{Závěr}
 
 

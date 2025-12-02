@@ -16,5 +16,198 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{navod}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=9646ff026e1974f8a47b69ffa1fb5f65}{%
+           family={Beneš},
+           familyi={B\bibinitperiod},
+           given={Petr\bibnamedelimb a\bibnamedelima kolektiv},
+           giveni={P\bibinitperiod\bibinitdelim a\bibinitperiod\bibinitdelim k\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Brno}%
+      }
+      \list{organization}{1}{%
+        {Ústav automatizace a měřící techniky, Fakulta elektrotechniky a komunikační techniky, VUT}%
+      }
+      \strng{namehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{fullhash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{fullhashraw}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{bibnamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorbibnamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authornamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorfullhash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorfullhashraw}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[cit. 2-12-2025]}
+      \field{title}{Návod k úloze 8 - Měření s odporovými tenzometry}
+      \field{year}{2025}
+    \endentry
+    \entry{vypocty}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=9646ff026e1974f8a47b69ffa1fb5f65}{%
+           family={Beneš},
+           familyi={B\bibinitperiod},
+           given={Petr\bibnamedelimb a\bibnamedelima kolektiv},
+           giveni={P\bibinitperiod\bibinitdelim a\bibinitperiod\bibinitdelim k\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Brno}%
+      }
+      \list{organization}{1}{%
+        {Ústav automatizace a měřící techniky, Fakulta elektrotechniky a komunikační techniky, VUT}%
+      }
+      \strng{namehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{fullhash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{fullhashraw}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{bibnamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorbibnamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authornamehash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorfullhash}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \strng{authorfullhashraw}{9646ff026e1974f8a47b69ffa1fb5f65}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[cit. 2-12-2025]}
+      \field{title}{Základní terminologie a výpočty}
+      \field{year}{2025}
+    \endentry
+    \entry{mkyvadlo}{online}{}{}
+      \list{location}{1}{%
+        {San Francisco (CA)}%
+      }
+      \list{publisher}{1}{%
+        {Wikimedia Foundation}%
+      }
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Wikipedia: the free encyclopedia}
+      \field{title}{Matematické kyvadlo}
+      \field{urlday}{2}
+      \field{urlmonth}{12}
+      \field{urlyear}{2025}
+      \field{year}{2001-}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://cs.wikipedia.org/wiki/Matematick%C3%A9_kyvadlo
+      \endverb
+      \verb{url}
+      \verb https://cs.wikipedia.org/wiki/Matematick%C3%A9_kyvadlo
+      \endverb
+    \endentry
+    \entry{nejistoty}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=209d8e13405274a44b00dbbe1b4c7463}{%
+           family={Čejka},
+           familyi={Č\bibinitperiod},
+           given={Miroslav},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Brno}%
+      }
+      \list{organization}{1}{%
+        {Ústav automatizace a měřící techniky, Fakulta elektrotechniky a komunikační techniky, VUT}%
+      }
+      \strng{namehash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{fullhash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{fullhashraw}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{bibnamehash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{authorbibnamehash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{authornamehash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{authorfullhash}{209d8e13405274a44b00dbbe1b4c7463}
+      \strng{authorfullhashraw}{209d8e13405274a44b00dbbe1b4c7463}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[cit. 2-12-2025]}
+      \field{title}{Stručný úvod do problematiky nejistot měření}
+      \field{year}{2024}
+    \endentry
+    \entry{nejistoty_prezentace}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=9d838a9413a7d31704fbebae32ff3134}{%
+           family={Pikula},
+           familyi={P\bibinitperiod},
+           given={Stanislav},
+           giveni={S\bibinitperiod}}}%
+        {{hash=00023998d414942f6a8945451101f026}{%
+           family={Málek},
+           familyi={M\bibinitperiod},
+           given={Petr},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Brno}%
+      }
+      \list{organization}{1}{%
+        {Ústav automatizace a měřící techniky, Fakulta elektrotechniky a komunikační techniky, VUT}%
+      }
+      \strng{namehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{fullhash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{fullhashraw}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{bibnamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorbibnamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authornamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorfullhash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorfullhashraw}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[cit. 2-12-2025]}
+      \field{title}{Nejistoty měření}
+      \field{year}{2025}
+    \endentry
+    \entry{zaokrouhlovani}{manual}{}{}
+      \name{author}{2}{}{%
+        {{hash=9d838a9413a7d31704fbebae32ff3134}{%
+           family={Pikula},
+           familyi={P\bibinitperiod},
+           given={Stanislav},
+           giveni={S\bibinitperiod}}}%
+        {{hash=00023998d414942f6a8945451101f026}{%
+           family={Málek},
+           familyi={M\bibinitperiod},
+           given={Petr},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Brno}%
+      }
+      \list{organization}{1}{%
+        {Ústav automatizace a měřící techniky, Fakulta elektrotechniky a komunikační techniky, VUT}%
+      }
+      \strng{namehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{fullhash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{fullhashraw}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{bibnamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorbibnamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authornamehash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorfullhash}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \strng{authorfullhashraw}{e0efd85cd20caa101e73fa1b7e498e6d}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[cit. 2-12-2025]}
+      \field{title}{Uvádění nejistot a zaokrouhlování}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
