@@ -62,7 +62,7 @@ figure(2)
     title("Závislost údaje z Vishay P-3500 D na zatížení nosníku m")
     xlabel("Zatížení nosníku m [kg]")
     ylabel("Údaj z Vishay P-3500 D [-]")
-    legend("Naměřené body", "Lineární regrese (MNČ)", "Přímka D = 170", "Průnik přímek (hledaná hmotnost závěsu)")
+    legend( "Lineární regrese (MNČ)","Naměřené body", "Přímka D = 170", "Průnik přímek (hledaná hmotnost závěsu)")
     fontsize("scale", 2)
 
 m_zaves = -4:0.02:5;
@@ -188,16 +188,16 @@ epsilon5_ctvrt_2 = abs(4*(U5_ctvrt_2 - U5_ctvrt_2(1))/K2/U1/1000);
 epsilon5_ctvrt_2_R = abs(4*(U5_ctvrt_2_R - U5_ctvrt_2_R(1))/K2/U1/1000); 
 epsilon5_ctvrt_3 = abs(4*(U5_ctvrt_3 - U5_ctvrt_3(1))/K2/U1/1000);
 epsilon5_ctvrt_3_R = abs(4*(U5_ctvrt_3_R - U5_ctvrt_3_R(1))/K2/U1/1000);
-epsilon5_pul = abs(4*(U5_pul - U5_pul(1))/K2/U1/1000);
-epsilon5_pul_R = abs(4*(U5_pul_R - U5_pul_R(1))/K2/U1/1000);
+epsilon5_pul = (1/(1+mu))*abs(4*(U5_pul - U5_pul(1))/K2/U1/1000) ;
+epsilon5_pul_R = (1/(1+mu))*abs(4*(U5_pul_R - U5_pul_R(1))/K2/U1/1000);
 % ukol 6
 
 E5_ctvrt_2_vec = sigma_n./epsilon5_ctvrt_2;
 E5_ctvrt_2_R_vec = sigma_n./epsilon5_ctvrt_2_R;
 E5_ctvrt_3_vec = sigma_n./epsilon5_ctvrt_3;
 E5_ctvrt_3_R_vec = sigma_n./epsilon5_ctvrt_3_R;
-E5_pul_vec = sigma_n./epsilon5_pul + sigma_n./epsilon5_pul.*mu;
-E5_pul_R_vec = sigma_n./epsilon5_pul_R + sigma_n./epsilon5_pul_R.*mu;
+E5_pul_vec = sigma_n./epsilon5_pul ;
+E5_pul_R_vec = sigma_n./epsilon5_pul_R ;
 
 E5_ctvrt_2 = mean(E5_ctvrt_2_vec(2:7));
 E5_ctvrt_2_R = mean(E5_ctvrt_2_R_vec(2:7));
